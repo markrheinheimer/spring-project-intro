@@ -4,12 +4,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
+@ResponseBody
+@RequestMapping("hello")
 public class HelloController {
 
     // Since there is no routing information, by default this method lives at the
     // root path, this can handle requests at the root path localhost:8080 or localhost:8080/
     @GetMapping
-    @ResponseBody
+//    @ResponseBody
     public String rootPath() {
         return "I'm the root path!";
     }
@@ -22,8 +24,9 @@ public class HelloController {
 //        return "Hello, Spring!";
 //    }
 
+    // lives at /hello/goodbye
     @GetMapping("goodbye")
-    @ResponseBody
+//    @ResponseBody
     public String goodbye() {
         return "Goodbye, Spring!";
     }
@@ -37,8 +40,9 @@ public class HelloController {
 //    }
 
         // Handles get and post request
+    // lives at /hello/hello
     @RequestMapping(method = {RequestMethod.GET, RequestMethod.POST}, value="hello")
-    @ResponseBody
+//    @ResponseBody
     public String helloWithQueryParam(@RequestParam String name) {
         return "Hello, " + name + "!";
     }
@@ -46,8 +50,9 @@ public class HelloController {
 
     // Handles requests of the form /hello/LaunchCode
 
+    // lives at /hello/hello/{name}
     @GetMapping("hello/{name}")
-    @ResponseBody
+//    @ResponseBody
     public String helloWithPathParameter(@PathVariable String name) {
         return "Hello, " + name + "!";
     }
@@ -67,8 +72,9 @@ public class HelloController {
 //    }
 
     // Using a post request
+    // lives at /hello/form
     @GetMapping("form")
-    @ResponseBody
+//    @ResponseBody
     public String helloForm() {
         return "<html>" +
                 "<body>" +
