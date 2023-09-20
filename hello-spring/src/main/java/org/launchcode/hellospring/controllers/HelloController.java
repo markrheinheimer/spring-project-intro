@@ -1,10 +1,7 @@
 package org.launchcode.hellospring.controllers;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class HelloController {
@@ -33,11 +30,19 @@ public class HelloController {
 
     // Handles request of the form /hello?name=LaunchCode
 
-    @GetMapping("hello")
+//    @GetMapping("hello")  //This handle get request
+//    @ResponseBody
+//    public String helloWithQueryParam(@RequestParam String name) {
+//        return "Hello, " + name + "!";
+//    }
+
+        // Handles get and post request
+    @RequestMapping(method = {RequestMethod.GET, RequestMethod.POST}, value="hello")
     @ResponseBody
     public String helloWithQueryParam(@RequestParam String name) {
         return "Hello, " + name + "!";
     }
+
 
     // Handles requests of the form /hello/LaunchCode
 
@@ -45,5 +50,33 @@ public class HelloController {
     @ResponseBody
     public String helloWithPathParameter(@PathVariable String name) {
         return "Hello, " + name + "!";
+    }
+
+    // Using a get request
+//    @GetMapping("form")
+//    @ResponseBody
+//    public String helloForm() {
+//        return "<html>" +
+//                "<body>" +
+//                "<form action='hello'>" + // submits a request to /hello, by default it is a get request, so the handle above works
+//                "<input type='text' name='name'>" +
+//                "<input type='submit' value='Greet me!'>" +
+//                "</form>" +
+//                "</body>" +
+//                "<html>";
+//    }
+
+    // Using a post request
+    @GetMapping("form")
+    @ResponseBody
+    public String helloForm() {
+        return "<html>" +
+                "<body>" +
+                "<form action='hello' method ='post'>" +
+                "<input type='text' name='name'>" +
+                "<input type='submit' value='Greet me!'>" +
+                "</form>" +
+                "</body>" +
+                "<html>";
     }
 }
