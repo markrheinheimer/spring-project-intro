@@ -3,6 +3,8 @@ package org.launchcode.hellospring.controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Objects;
+
 @Controller
 @ResponseBody
 @RequestMapping("hello")
@@ -41,11 +43,11 @@ public class HelloController {
 
         // Handles get and post request
     // lives at /hello/hello
-    @RequestMapping(method = {RequestMethod.GET, RequestMethod.POST}, value="hello")
-//    @ResponseBody
-    public String helloWithQueryParam(@RequestParam String name) {
-        return "Hello, " + name + "!";
-    }
+//    @RequestMapping(method = {RequestMethod.GET, RequestMethod.POST}, value="hello")
+////    @ResponseBody
+//    public String helloWithQueryParam(@RequestParam String name) {
+//        return "Hello, " + name + "!";
+//    }
 
 
     // Handles requests of the form /hello/LaunchCode
@@ -80,9 +82,39 @@ public class HelloController {
                 "<body>" +
                 "<form action='hello' method ='post'>" +
                 "<input type='text' name='name'>" +
+                "<select name='language'>" +
+                "<option value=''>---choose a language---</option>" +
+                "<option value='English'>English</option>" +
+                "<option value='German'>German</option>" +
+                "<option value='Spanish'>Spanish</option>" +
+                "<option value='French'>French</option>" +
+                "<option value='Italian'>Italian</option>" +
+                "</select>" +
                 "<input type='submit' value='Greet me!'>" +
                 "</form>" +
                 "</body>" +
                 "<html>";
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value="hello")
+    public String helloPost(@RequestParam String name, String language) {
+        if (name == null) {name = "World";}
+        return createMessage(name, language);
+    }
+
+    public static String createMessage(String name, String language) {
+            String chosenLanguage;
+            if (language.equals("English")) {
+                chosenLanguage = "Hello";
+            } else if (language.equals("German")) {
+                chosenLanguage = "Hallo";
+            } else if (language.equals("Spanish")) {
+                chosenLanguage = "Hola";
+            } else if (language.equals("French")) {
+                chosenLanguage = "Bonjour";
+            } else {
+                chosenLanguage = "Ciao";
+            }
+            return chosenLanguage + " " + name + "!";
     }
 }
