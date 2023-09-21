@@ -115,6 +115,11 @@ public class HelloController {
             } else {
                 chosenLanguage = "Ciao";
             }
-            return chosenLanguage + " " + name + "!";
+//            return chosenLanguage + " " + name + "!";
+            return "<html>" +
+                    "<body>" +
+                    "<h1 style='color: red'>" + chosenLanguage + " " + name + "!" +
+                    "</body>" +
+                    "</html>";
     }
 }
