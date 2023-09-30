@@ -118,7 +118,7 @@ public class HelloController {
 //            return chosenLanguage + " " + name + "!";
             return "<html>" +
                     "<body>" +
-                    "<h1 style='color: red'>" + chosenLanguage + " " + name + "!" +
+                    "<h1 style='color: red'>" + chosenLanguage + " " + name + "!</h1>" +
                     "</body>" +
                     "</html>";
     }
